@@ -90,3 +90,6 @@ app.get("/carsModel/:id", (req, res) => {
   });
 });
 
+// SELECT grades.*, users.firstName, users.lastName FROM grades LEFT JOIN users ON grades.userId = users.id;
+// SELECT subject, COUNT(id) subject, AVG(grade) average_grade FROM grades GROUP BY subject;
+// SELECT subject, ROUND(AVG(grade)) average, COUNT(*) amount FROM `grades` GROUP BY subject;
