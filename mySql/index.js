@@ -57,7 +57,6 @@ app.get("/users/limit", (req, res) => {
   );
 });
 
-
 //get user by id
 app.get("/users/:id", (req, res) => {
   const id = req.params.id;
