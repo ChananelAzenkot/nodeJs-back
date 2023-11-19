@@ -10,5 +10,14 @@ module.exports = (app) => {
         res.send(result);
       });
     });
+
+    app.delete("/products/:id", (req, res) => {
+      con.query("DELETE FROM `products` WHERE `id` = ?", [req.params.id], (err, result) => {
+        if (err) {
+          throw err;
+        }
+        res.send();
+      });
+    });
     
 }
