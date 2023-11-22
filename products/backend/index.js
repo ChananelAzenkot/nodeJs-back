@@ -25,6 +25,7 @@ app.use((req, res, next) => {
   content += `Time: ${new Date().toISOString()}\n`;
   content += `Method: ${req.method}\n`;
   content += `Route: ${req.url}\n`;
+  content += `Body: ${JSON.stringify(req.body)}\n`;
 
   content += "\n";
 
