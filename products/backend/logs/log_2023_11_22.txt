@@ -1,0 +1,8 @@
+Time: 2023-11-22T19:15:46.991Z
+Method: PUT
+Route: /products/1
+
+Time: 2023-11-22T19:15:47.005Z
+Method: GET
+Route: /products
+

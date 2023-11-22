@@ -18,7 +18,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  const fileName = `log_${moment().format("Y_M_D")}.txt`;
+  const fileName = `./logs/log_${moment().format("Y_M_D")}.txt`;
 
   let content = "";
 
