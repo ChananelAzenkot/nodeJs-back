@@ -366,3 +366,9 @@ button.returnLink svg {
   display: flex;
   justify-content: space-between;
 }
+
+p.errMessage {
+  color: darkred;
+  font-size: 2em;
+  text-align: center;
+}

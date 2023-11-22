@@ -1,9 +1,10 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 require("./sqlConnection");
 
 const app = express();
 
-const cors = require("cors");
+app.use(express.json());
 
 app.use(
   cors({
@@ -15,11 +16,11 @@ app.use(
 );
 
 app.listen(4000, () => {
-    console.log('Listening to port 4000');
+  console.log("listening on port 4000");
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello from products');
+app.get("/", (req, res) => {
+  res.send("Welcome to the server");
 });
 
-require('./handlers/products')(app);
+require("./handlers/products")(app);
