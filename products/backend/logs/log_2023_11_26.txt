@@ -18,3 +18,8 @@ Method: GET
 Route: /products
 Body: {}
 
+Time: 2023-11-26T16:01:46.476Z
+Method: GET
+Route: /products
+Body: {}
+
