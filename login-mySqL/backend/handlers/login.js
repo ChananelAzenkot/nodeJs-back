@@ -17,8 +17,20 @@ module.exports = (app) => {
         if (!result.length) {
           return res.status(401).send({ message: "User not found " });
         }
-        res.send(result.pop());
+        const user = result.pop();
+
+        req.session.user = user;
+
+        res.send(user);
       }
     );
+  });
+
+  app.get("/login", (req, res) => {
+    if(req.session.user){
+        res.send(req.session.user);
+    }else{
+        res.status(401).send({message: "User not found"});
+    }
   });
 };
