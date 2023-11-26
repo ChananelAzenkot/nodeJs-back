@@ -20,3 +20,4 @@ app.get('/', (req, res) => {
     res.send('Hello Login !');
 });
 
+require('./handlers/signup')(app);

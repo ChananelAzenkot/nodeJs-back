@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -8,6 +8,8 @@ export default function Signup() {
     email: "",
     fullName: "",
   });
+
+  const navigate = useNavigate();
 
   const handelInput = (ev) => {
     const { name, value } = ev.target;
@@ -20,6 +22,20 @@ export default function Signup() {
 
   const signup = (ev) => {
     ev.preventDefault();
+    fetch("http://localhost:4000/signup", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        alert("user created");
+        navigate("/login");
+      } else {
+        alert("user not created");
+      }
+    });
   };
 
   return (
