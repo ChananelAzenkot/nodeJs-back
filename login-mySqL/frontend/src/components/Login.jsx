@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    userName: "",
+    email: "",
     password: "",
   });
 
@@ -18,6 +18,22 @@ export default function Login() {
 
   const login = (ev) => {
     ev.preventDefault();
+    fetch("http://localhost:4000/login", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        console.log("user logged in");
+        alert("user logged in");
+      } else {
+        console.log("user not logged in");
+        alert("user not logged in");
+      }
+    });
   };
 
   return (
@@ -27,17 +43,17 @@ export default function Login() {
 
         <form onSubmit={login}>
           <label>
-            user name:
+            Email:
             <input
               type="text"
-              name="userName"
-              value={formData.userName}
+              name="email"
+              value={formData.email}
               onChange={handelInput}
             />
           </label>
 
           <label>
-            password:
+            Password:
             <input
               type="password"
               name="password"

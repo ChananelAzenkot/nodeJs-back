@@ -21,3 +21,4 @@ app.get('/', (req, res) => {
 });
 
 require('./handlers/signup')(app);
+require('./handlers/login')(app);
