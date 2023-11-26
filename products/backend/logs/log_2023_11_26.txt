@@ -1,0 +1,20 @@
+Time: 2023-11-26T15:48:51.766Z
+Method: GET
+Route: /products
+Body: {}
+
+Time: 2023-11-26T15:49:26.714Z
+Method: GET
+Route: /products
+Body: {}
+
+Time: 2023-11-26T15:50:15.571Z
+Method: GET
+Route: /products
+Body: {}
+
+Time: 2023-11-26T15:50:51.513Z
+Method: GET
+Route: /products
+Body: {}
+
