@@ -32,9 +32,6 @@ module.exports = (app) => {
 
         delete req.session.attempts;
 
-        if (!result.length) {
-          return res.status(401).send({ message: "User not found " });
-        }
         const user = result.pop();
 
         req.session.user = user;
