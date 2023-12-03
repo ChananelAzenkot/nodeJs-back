@@ -1,8 +1,11 @@
-const con = require("../sqlConnection");
+const con = require('../sqlConnection');
 
-module.exports = (app) => {
-    app.post("/logout", (req, res) => {
-        req.session.destroy();
-        res.send({ message: "Logged out" });
+module.exports = app => {
+
+    app.get('/logout', (req, res) => {
+        delete req.session.user;
+
+        res.send();
     });
-};
+
+}

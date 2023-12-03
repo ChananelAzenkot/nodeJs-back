@@ -1,51 +1,51 @@
-const con = require("../sqlConnection");
+const con = require('../sqlConnection');
 
-module.exports = (app) => {
-  app.post("/login", (req, res) => {
-    const { email, password } = req.body;
+module.exports = app => {
 
-    if (req.session.attempts >= 5) {
-      return res.status(403).send({ message: "user is blocked !! " });
-    }
+    app.post("/login", (req, res) => {
+        const { email, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).send({ message: "Some not good " });
-    }
-    con.query(
-      "SELECT * FROM `users` WHERE `email` = ? AND `password` = MD5(?)",
-      [email, password],
-      (err, result) => {
-        if (err) {
-          return res.status(500).send({ message: err.message });
+        if (req.session.attemps >= 7) {
+            return res.status(403).send({ message: 'not good , passwords wrong try agin !' });
         }
 
-        if (!result.length) {
-          if (!req.session.attempts) {
-            req.session.attempts = 0;
-          }
-          req.session.attempts++;
-
-          return res
-            .status(403)
-            .send({ message: "Email or password is not correct" });
+        if (!email || !password) {
+            return res.status(403).send({ message: 'one or more then  not okay.' });
         }
 
-        delete req.session.attempts;
+        con.query("SELECT * FROM `users` WHERE `email` = ? AND `password` = MD5(?)", [email, password], (err, result) => {
+            if (err) {
+                return res.status(500).send({ message: 'Error' });
+            }
 
-        const user = result.pop();
+            if (!result.length) {
 
-        req.session.user = user;
+                if (!req.session.attemps) {
+                    req.session.attemps = 0;
+                }
 
-        res.send(user);
-      }
-    );
-  });
+                req.session.attemps++;
 
-  app.get("/login", (req, res) => {
-    if (req.session.user) {
-      res.send(req.session.user);
-    } else {
-      res.status(401).send({ message: "User not found" });
-    }
-  });
-};
+                return res.status(403).send({ message: 'Email or password is not correct' });
+            }
+
+            delete req.session.attemps;
+
+            const user = result.pop();
+
+            req.session.user = user;
+
+            res.send(user);
+        });
+    });
+
+    app.get('/login', (req, res) => {
+        
+        if (req.session.user) {
+            res.send(req.session.user);
+        } else {
+            res.status(401).send({ message: 'user is not connected' });
+        }
+    });
+
+}
