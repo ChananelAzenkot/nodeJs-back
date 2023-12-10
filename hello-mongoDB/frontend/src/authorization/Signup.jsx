@@ -34,7 +34,7 @@ export default function Signup() {
             if (res.ok) {
                 navigate('/login');
             } else {
-                console.error("מה אתה לא רואה שיש שגיאה?????");
+                console.error("we have an error");
             }
         })
     }

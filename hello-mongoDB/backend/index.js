@@ -27,4 +27,3 @@ app.get("/", (req, res) => res.send("Hello World!"));
 require("./handlers/clients")(app);
 require("./handlers/signup")(app);
 require("./handlers/login")(app);
-require("./handlers/logout")(app);

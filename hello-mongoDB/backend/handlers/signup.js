@@ -1,17 +1,21 @@
-const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const { User } = require("./userModel");
 
 module.exports = (app) => {
-    const schema = new mongoose.Schema({
-      fullName: String,
-      email: String,
-      password: String,
+
+  app.post("/signup", async (req, res) => {
+    const { fullName, email, password } = req.body;
+
+    if (!email || !password || !fullName) {
+      return res.status(403).send("Missing fields");
+    }
+
+    const user = new User({
+      fullName,
+      email,
+      password: await bcrypt.hash(password, 10),
     });
-        const User = mongoose.model("users", schema);
-    app.post("/signup", async (req, res) => {
-        const { fullName, email, password } = req.body;
-        if (!email || !password || !fullName) {
-            return res.status(403).send("Missing fields");
-        }
-        
-    });
+    const newUser = await user.save();
+    res.send(newUser);
+  });
 };
