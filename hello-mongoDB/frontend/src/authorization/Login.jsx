@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { GeneralContext } from "../App";
 
 export default function Login() {
-    const { user, setUser } = useContext(GeneralContext);
+    const { setUser } = useContext(GeneralContext);
 
     const [formData, setFormData] = useState({
         email: '',
@@ -39,7 +39,10 @@ export default function Login() {
                 });
             }
         })
-        .then(data => setUser(data))
+        .then(data => {
+            localStorage.token = data.token;
+            setUser(data);
+        })
         .catch(err => console.log(err));
     }
 

@@ -23,7 +23,7 @@ export default function Dashboard() {
       structure.forEach((item, i) => item.value = Math.round(data[i] * 10) / 10);
       setStructure([...structure]);
     });
-  }, [structure]);
+  }, []);
   return (
     <div className='Dashboard'>
       {
