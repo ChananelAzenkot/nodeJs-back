@@ -1,48 +1,43 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("./userModel");
-const JWT_SECRET = 'mongoDBChananel!!!Azenkot';
+const { JWT_SECRET, getUser } = require("../config");
+const guard = require("../guard");
 
 module.exports = (app) => {
   app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(403).send("Missing fields");
+      return res.status(403).send("Inputs cant be empty");
     }
 
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(403).send("password or email incorrect");
+      return res.status(403).send("email or password is incorrect");
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      return res.status(403).send("password or email incorrect");
+      return res.status(403).send("email or password is incorrect");
     }
-    const userObj = user.toObject();
-    delete userObj.password;
-    delete userObj.email;
 
-    userObj.token = jwt.sign({ user: userObj }, JWT_SECRET,{expiresIn: '1h'});
+    const userObject = user.toObject();
+    delete userObject.password;
+    delete userObject.email;
 
-    res.send(userObj);
+    userObject.token = jwt.sign({ user: userObject }, JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.send(userObject);
   });
 
-  app.get("/login", async (req, res) => {
-    const { token } = req.headers;
+  app.get("/login", guard, async (req, res) => {
+    const user = getUser(req, res);
 
-    if (!token) {
-      return res.status(403).send("Missing token");
-    }
-
-    try {
-      const { user } = jwt.verify(token, JWT_SECRET);
-      res.send(user);
-    } catch (e) {
-      res.status(403).send("Invalid token");
-    }
+    res.send(user);
   });
 };
