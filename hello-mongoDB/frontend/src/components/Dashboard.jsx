@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './Dashboard.css';
+import "./Dashboard.css";
 
 export default function Dashboard() {
   const [structure, setStructure] = useState([
@@ -20,20 +20,20 @@ export default function Dashboard() {
       fetch(`${url}/products/max`, params).then((res) => res.text()),
       fetch(`${url}/products/min`, params).then((res) => res.text()),
     ]).then((data) => {
-      structure.forEach((item, i) => item.value = Math.round(data[i] * 10) / 10);
+      structure.forEach(
+        (item, i) => (item.value = Math.round(data[i] * 10) / 10)
+      );
       setStructure([...structure]);
     });
   }, []);
   return (
-    <div className='Dashboard'>
-      {
-        structure.map((s, index) => 
-          <div key={index} className='card'>
-            <header>{s.title}</header>
-            <div>{s.value}</div>
-          </div>    
-        )
-      }
+    <div className="Dashboard">
+      {structure.map((s, index) => (
+        <div key={index} className="card">
+          <header>{s.title}</header>
+          <div>{s.value}</div>
+        </div>
+      ))}
     </div>
-  )
+  );
 }

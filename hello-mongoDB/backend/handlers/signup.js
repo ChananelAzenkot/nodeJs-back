@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const { User } = require("./userModel");
 
 module.exports = (app) => {
-
   app.post("/signup", async (req, res) => {
     const { fullName, email, password } = req.body;
 

@@ -1,73 +1,89 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import './Product.css';
-import { useEffect, useState } from 'react';
-import { AiOutlineRight } from 'react-icons/ai';
+import { Link, useNavigate, useParams } from "react-router-dom";
+import "./Product.css";
+import { useEffect, useState } from "react";
+import { AiOutlineRight } from "react-icons/ai";
 
 export default function ProductEdit() {
-    const { id } = useParams();
-    const [item, setItem] = useState();
-    const navigate = useNavigate();
+  const { id } = useParams();
+  const [item, setItem] = useState();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch(`http://localhost:4000/products/${id}`, {
-            credentials: 'include',
-        })
-        .then(res => res.json())
-        .then(data => setItem(data));
-    }, [id]);
+  useEffect(() => {
+    fetch(`http://localhost:4000/products/${id}`, {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => setItem(data));
+  }, [id]);
 
-    const handelInput = ev => {
-        const { name, value } = ev.target;
+  const handelInput = (ev) => {
+    const { name, value } = ev.target;
 
-        setItem({
-            ...item,
-            [name]: value,
-        });
-    }
+    setItem({
+      ...item,
+      [name]: value,
+    });
+  };
 
-    const save = ev => {
-        ev.preventDefault();
+  const save = (ev) => {
+    ev.preventDefault();
 
-        fetch(`http://localhost:4000/products/${item.id}`, {
-            credentials: 'include',
-            method: 'PUT',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify(item),
-        })
-        .then(() => navigate('/products'));
-    }
+    fetch(`http://localhost:4000/products/${item.id}`, {
+      credentials: "include",
+      method: "PUT",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(item),
+    }).then(() => navigate("/products"));
+  };
 
-    return (
-        <div className='ArticlesEdit'>
-            <button className='returnLink'>
-                <Link to="/products"><AiOutlineRight />Back To The Products</Link>
-            </button>
+  return (
+    <div className="ArticlesEdit">
+      <button className="returnLink">
+        <Link to="/products">
+          <AiOutlineRight />
+          Back To The Products
+        </Link>
+      </button>
 
-            {
-                item &&
-                <>
-                    <h2>Edit Product</h2>
+      {item && (
+        <>
+          <h2>Edit Product</h2>
 
-                    <form onSubmit={save}>
-                        <label>
-                            Name:
-                            <input type="text" name="name" value={item.name} onChange={handelInput} />
-                        </label>
+          <form onSubmit={save}>
+            <label>
+              Name:
+              <input
+                type="text"
+                name="name"
+                value={item.name}
+                onChange={handelInput}
+              />
+            </label>
 
-                        <label>
-                            Price:
-                            <input type="text" name="price" value={item.price} onChange={handelInput} />
-                        </label>
+            <label>
+              Price:
+              <input
+                type="text"
+                name="price"
+                value={item.price}
+                onChange={handelInput}
+              />
+            </label>
 
-                        <label>
-                            Discount:
-                            <input type="text" name="discount" value={item.discount} onChange={handelInput} />
-                        </label>
+            <label>
+              Discount:
+              <input
+                type="text"
+                name="discount"
+                value={item.discount}
+                onChange={handelInput}
+              />
+            </label>
 
-                        <button>Save</button>
-                    </form>
-                </>
-            }
-        </div>
-    )
+            <button>Save</button>
+          </form>
+        </>
+      )}
+    </div>
+  );
 }
