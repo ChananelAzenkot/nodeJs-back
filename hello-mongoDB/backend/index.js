@@ -3,8 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/full-stack-w131122er');
-    console.log('mongodb connection established on port 27017');
+    await mongoose.connect("mongodb://localhost:27017/BackHand-FullStack");
+    console.log("MongoDB connected");
 }
 
 main().catch(err => console.log(err));
@@ -27,3 +27,4 @@ require('./handlers/clients/clients')(app);
 require('./handlers/auth/login')(app);
 require('./handlers/auth/logout')(app);
 require('./handlers/auth/signup')(app);
+require('./handlers/products/products')(app);
