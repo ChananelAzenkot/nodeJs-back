@@ -6,8 +6,8 @@ function Navbar() {
     const loc = useLocation();
 
     const navbar = [
-        { path: '/', title: 'בית' },
-        { path: '/products', title: 'ניהול מוצרים' },
+        { path: '/', title: 'Home' },
+        { path: '/products', title: 'Manger Products' },
     ];
 
     return (

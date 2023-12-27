@@ -44,7 +44,7 @@ export default function ProductNew() {
             {
                 item &&
                 <>
-                    <h2>הוספת מוצר</h2>
+                    <h2>Add Product : </h2>
 
                     <form onSubmit={save}>
                         <label>
@@ -62,7 +62,7 @@ export default function ProductNew() {
                             <input type="text" name="discount" value={item.discount} onChange={handelInput} />
                         </label>
 
-                        <button>הוסף</button>
+                        <button>Add</button>
                     </form>
                 </>
             }

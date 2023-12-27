@@ -42,30 +42,30 @@ export default function Signup() {
     return (
         <>
             <div className="Login smallFrame">
-                <h2>יצירת משתמש</h2>
+                <h2>Create Use </h2>
 
                 <form onSubmit={signup}>
                     <label>
-                        שם מלא:
+                        Full Name :
                         <input type="text" name="fullName" value={formData.fullName} onChange={handelInput} />
                     </label>
 
                     <label>
-                        אימייל:
+                        Email :
                         <input type="email" name="email" value={formData.email} onChange={handelInput} />
                     </label>
 
                     <label>
-                        סיסמה:
+                        Password :
                         <input type="password" name="password" value={formData.password} onChange={handelInput} />
                     </label>
 
-                    <button>הרשם</button>
+                    <button>SIGN-UP</button>
                 </form>
             </div>
 
             <p className="signup">
-                <Link to="/login">להתחברות לחץ כאן</Link>
+                <Link to="/login">To Login </Link>
             </p>
         </>
     )

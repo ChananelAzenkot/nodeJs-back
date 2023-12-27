@@ -52,7 +52,7 @@ export default function ProductEdit() {
             {
                 item &&
                 <>
-                    <h2>עריכת מוצר</h2>
+                    <h2>Edit Product : </h2>
 
                     <form onSubmit={save}>
                         <label>
@@ -70,7 +70,7 @@ export default function ProductEdit() {
                             <input type="text" name="discount" value={item.discount} onChange={handelInput} />
                         </label>
 
-                        <button>שמירה</button>
+                        <button>Save</button>
                     </form>
                 </>
             }

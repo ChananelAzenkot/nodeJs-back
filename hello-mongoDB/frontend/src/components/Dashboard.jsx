@@ -3,10 +3,10 @@ import './Dashboard.css';
 
 export default function Dashboard() {
     const [structure, setStructure] = useState([
-        { name: 'amount', title: 'כמות מוצרים' },
-        { name: 'avg', title: 'ממוצע מחירים' },
-        { name: 'min', title: 'מחיר מקסימלי' },
-        { name: 'max', title: 'מחיר מינימלי' },
+        { name: 'amount', title: 'Quantity Of Products' },
+        { name: 'avg', title: 'Average Prices' },
+        { name: 'min', title: 'Minimum Price' },
+        { name: 'max', title: 'Maximum Price' },
     ]);
 
     useEffect(() => {
@@ -22,8 +22,8 @@ export default function Dashboard() {
         Promise.all([
             fetch(`${url}/products/amount`, params).then(res => res.text()),
             fetch(`${url}/products/avg`, params).then(res => res.text()),
-            fetch(`${url}/products/max`, params).then(res => res.text()),
             fetch(`${url}/products/min`, params).then(res => res.text()),
+            fetch(`${url}/products/max`, params).then(res => res.text()),
         ])
         .then(data => {
             structure.forEach((item, i) => item.value = Math.round(data[i] * 10) / 10);
