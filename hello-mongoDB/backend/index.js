@@ -28,4 +28,5 @@ require('./handlers/auth/login')(app);
 require('./handlers/auth/logout')(app);
 require('./handlers/auth/signup')(app);
 require('./handlers/products/products')(app);
-require('./handlers/products/products_Dashboard')(app);
+require("./handlers/products/products-dashboard")(app);
+
