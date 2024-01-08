@@ -39,7 +39,7 @@ app.post("/file-upload", (req, res) => {
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.write(`<meta charset="UTF-8">`);
             res.write("<h1>the picture upload</h1>");
-            res.write(`<img width="100%" src="/file/${file.originalFilename}">`);
+            res.write(`<img width="70%" src="/files/${file.originalFilename}">`);
             res.end();
         });
     });
