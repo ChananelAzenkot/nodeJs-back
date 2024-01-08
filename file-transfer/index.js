@@ -11,7 +11,9 @@ app.use(cors({
     allowedHeaders: 'Content-Type, Accept',
 }));
 
-app.listen(9600);
+app.listen(9600, function () {
+  console.log("App listening on port 9600!");
+});
 
 app.use(express.static("public"));
 
