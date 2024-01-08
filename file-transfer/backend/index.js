@@ -23,8 +23,18 @@ app.post('/file-upload', (req, res) => {
     const form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, files) => {
-        console.log(files);
+        if (err) {
+          res.status(503).send("Error while uploading file");
+        }
 
-        res.send('File uploaded!');
+        const file = files.myFile[0];
+
+        fs.rename(file.filepath, `./files/${file.originalFilename}`, err => {
+
+            if(err){
+                res.status(503).send("Error while uploading file");
+            }
+                    res.send(`File ${file.originalFilename} uploaded success!`);
+        });
     });
 });
